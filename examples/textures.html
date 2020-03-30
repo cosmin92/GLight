@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple scene</title>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+    <!-- INCLUDE THE LIBRARY -->
+    <script type="text/javascript" src="../dist/gLight.js"></script>
+</head>
+<body>
+<canvas id="glCanvas" width="1366" height="667">
+    Your browser does not seem to support HTML5 canvas.
+</canvas>
+</body>
+
+<script type="text/javascript">
+
+    /**
+     * Add de onload handler
+     */
+    window.addEventListener("load", main);
+
+    let scene, body;
+
+    function main() {
+        let canvas = document.getElementById("glCanvas");
+        GLIGHT.initialize(canvas);
+
+        scene = new GLIGHT.Scene();
+
+        let plane = new GLIGHT.Mesh(new GLIGHT.PlaneGeometry("XZ", 4, 6), new GLIGHT.LambertMaterial(new GLIGHT.Color(255, 0, 244, 1)));
+        plane.texture = new GLIGHT.Texture("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7yFmnHG55WfrCLeFmEMxmMD_lbHW5wGr4C2jnxW9039RpGpASQ");
+        scene.add(plane);
+
+        let plane1 = new GLIGHT.Mesh(new GLIGHT.PlaneGeometry("XY", 4, 3), new GLIGHT.LambertMaterial(new GLIGHT.Color(255, 0, 244, 1)));
+        plane1.translate.set(0, 1.5, -3);
+        plane1.texture = new GLIGHT.Texture("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzFvdEQvjlcfzbQSqUJfN7HGKEigs_7t5ia_qksS9lF16JehOoIg");
+        scene.add(plane1);
+
+        let plane2 = new GLIGHT.Mesh(new GLIGHT.PlaneGeometry("YZ", 6, 3), new GLIGHT.LambertMaterial(new GLIGHT.Color(255, 0, 244, 1)));
+        plane2.translate.set(2, 1.5, 0);
+        plane2.texture = new GLIGHT.Texture("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzFvdEQvjlcfzbQSqUJfN7HGKEigs_7t5ia_qksS9lF16JehOoIg");
+        scene.add(plane2);
+
+        let box = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.5, 0.5, 0.5), new GLIGHT.LambertMaterial(new GLIGHT.Color(255, 0, 244, 1)));
+        scene.add(box);
+        box.texture = new GLIGHT.Texture("https://as2.ftcdn.net/jpg/01/99/14/99/500_F_199149981_RG8gciij11WKAQ5nKi35Xx0ovesLCRaU.jpg");
+        box.translate.set(1, 0.5, -1.5);
+        box.rotate.set(0, 36, 0);
+
+        let box1 = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.5, 0.5, 0.5), new GLIGHT.LambertMaterial(new GLIGHT.Color(255, 0, 244, 1)));
+        scene.add(box1);
+        box1.texture = new GLIGHT.Texture("https://as2.ftcdn.net/jpg/01/99/14/99/500_F_199149981_RG8gciij11WKAQ5nKi35Xx0ovesLCRaU.jpg");
+        box1.translate.set(1, 1.5, -1.6);
+        box1.rotate.set(0, 27, 0);
+
+        let box2 = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.5, 0.5, 0.5), new GLIGHT.LambertMaterial(new GLIGHT.Color(255, 0, 244, 1)));
+        scene.add(box2);
+        box2.texture = new GLIGHT.Texture("https://as2.ftcdn.net/jpg/01/99/14/99/500_F_199149981_RG8gciij11WKAQ5nKi35Xx0ovesLCRaU.jpg");
+        box2.scale.set(0.8, 0.8, 0.8);
+        box2.translate.set(0.85, 0.4, 0);
+
+        let sphere = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(0.5, 20, 20));
+        sphere.texture = new GLIGHT.Texture("data:image/jpeg;base64,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");
+        sphere.translate.set(0, 1.5, 0);
+        sphere.rotate.set(0, 0, 360);
+        scene.add(sphere);
+
+        let sphereTrack = new GLIGHT.RotationsTrack(sphere);
+
+        sphereTrack.addKeyframe(0, GLIGHT.EASE.LINEAR);
+
+        sphere.rotate.set(0, 360, 360);
+        sphereTrack.addKeyframe(10000, GLIGHT.EASE.LINEAR);
+
+        let pLight = new GLIGHT.PointLight();
+        pLight.translate.set(0, 4, 0);
+        scene.add(pLight);
+
+        createMan();
+        body.translate.set(0.6, 1.56, 0);
+        body.scale.set(0.6, 0.6, 0.6);
+        body.rotate.set(0, -90, 0);
+
+        GLIGHT.Renderer.setClearColor(123, 123, 123);
+        renderer = new GLIGHT.Renderer(scene);
+        renderer.viewer.rotate.set(14.11042944785276, 71.1566617862372, 0);
+        renderer.viewer.translate.set(-0.0881549624510582, -1.0739264899487184, -3.650701698852203);
+
+        console.log(renderer.viewer.translate);
+        console.log(renderer.viewer.rotate);
+
+        let clip = new GLIGHT.AnimationClip(renderer);
+        clip.addTrack(sphereTrack);
+        clip.loop();
+        clip.start();
+        window.addEventListener("click", function () {
+            console.log(renderer);
+        })
+        //render();
+    }
+
+    function createMan() {
+        body = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.5, 1, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        body.translate.set(0, 3.45, 0);
+        body.pivot.set(0, -1, 0);
+
+
+        let leftUpperLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.2, 0.5, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftUpperLeg.translate.set(0.3, -1.55, 0);
+        leftUpperLeg.rotate.set(-80, 0, 0);
+        leftUpperLeg.pivot.set(0, 0.5, 0);
+        leftUpperLeg.setParent(body);
+
+        let leftLowerLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.2, 0.5, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftLowerLeg.translate.set(0, -1.05, 0);
+        leftLowerLeg.rotate.set(80, 0, 0);
+        leftLowerLeg.pivot.set(0, 0.5, 0);
+        leftLowerLeg.setParent(leftUpperLeg);
+
+        let leftFoot = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.15, 0.15, 0.4), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftFoot.translate.set(0, -0.7, 0.2);
+        leftFoot.pivot.set(0, 0, 0.1);
+        leftFoot.setParent(leftLowerLeg);
+
+        let rightUpperLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.2, 0.5, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightUpperLeg.translate.set(-0.3, -1.55, 0);
+        rightUpperLeg.rotate.set(-80, 0, 0);
+        rightUpperLeg.pivot.set(0, 0.5, 0);
+        rightUpperLeg.setParent(body);
+
+        let rightLowerLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.2, 0.5, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightLowerLeg.translate.set(0, -1.05, 0);
+        rightLowerLeg.rotate.set(80, 0, 0);
+        rightLowerLeg.pivot.set(0, 0.5, 0);
+        rightLowerLeg.setParent(rightUpperLeg);
+
+        let rightFoot = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.15, 0.15, 0.4), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightFoot.translate.set(0, -0.7, 0.2);
+        rightFoot.pivot.set(0, 0, 0.1);
+        rightFoot.setParent(rightLowerLeg);
+
+        let leftUpperHand = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.1, 0.5, 0.1), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftUpperHand.translate.set(0.7, 0.5, 0);
+        leftUpperHand.rotate.set(0, 0, 10);
+        leftUpperHand.pivot.set(0, 0.5, 0);
+        leftUpperHand.setParent(body);
+
+        let leftLowerHand = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.1, 0.5, 0.1), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftLowerHand.translate.set(0, -1.05, 0);
+        leftLowerHand.pivot.set(0, 0.5, 0);
+        leftLowerHand.setParent(leftUpperHand);
+
+        let leftFist = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(0.4, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftFist.translate.set(0, -0.7, 0);
+        leftFist.pivot.set(0, 0, 0);
+        leftFist.setParent(leftLowerHand);
+
+        let rightUpperHand = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.1, 0.5, 0.1), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightUpperHand.translate.set(-0.7, 0.5, 0);
+        rightUpperHand.rotate.set(0, 0, -10);
+        rightUpperHand.pivot.set(0, 0.5, 0);
+        rightUpperHand.setParent(body);
+
+        let rightLowerHand = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.1, 0.5, 0.1), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightLowerHand.translate.set(0, -1.05, 0);
+        rightLowerHand.pivot.set(0, 0.5, 0);
+        rightLowerHand.setParent(rightUpperHand);
+
+        let rightFist = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(0.4, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightFist.translate.set(0, -0.7, 0);
+        rightFist.pivot.set(0, 0, 0);
+        rightFist.setParent(rightLowerHand);
+
+        let neck = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.15, 0.1, 0.15), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        neck.translate.set(0, 1.1, 0);
+        neck.pivot.set(0, -0.1, 0);
+        neck.setParent(body);
+
+        let head = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(0.6, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        head.translate.set(0, 0.55, 0);
+        head.rotate.set(30, 0, 0);
+        head.scale.set(1, 1.5, 1);
+        head.pivot.set(0, -0.4, 0);
+        head.setParent(neck);
+
+        scene.add(leftUpperLeg);
+        scene.add(leftLowerLeg);
+
+        scene.add(rightUpperLeg);
+        scene.add(rightLowerLeg);
+
+
+        scene.add(leftUpperHand);
+        scene.add(leftLowerHand);
+        scene.add(leftFist);
+
+        scene.add(rightUpperHand);
+        scene.add(rightLowerHand);
+        scene.add(rightFist);
+
+        scene.add(neck);
+        scene.add(head);
+
+        scene.add(leftFoot);
+        scene.add(rightFoot);
+
+        scene.add(body);
+    }
+
+</script>
+</html>

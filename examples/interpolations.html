@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple scene</title>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+    <!-- INCLUDE THE LIBRARY -->
+    <script type="text/javascript" src="../dist/gLight.js"></script>
+</head>
+<body>
+<canvas id="glCanvas" width="1366" height="667">
+    Your browser does not seem to support HTML5 canvas.
+</canvas>
+</body>
+
+<script type="text/javascript">
+
+    /**
+     * Add de onload handler
+     */
+    window.addEventListener("load", main);
+
+
+    function main() {
+        let canvas = document.getElementById("glCanvas");
+        GLIGHT.initialize(canvas);
+
+        let scene = new GLIGHT.Scene();
+
+        let cube = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.5, 0.5, 0.5), new GLIGHT.LambertMaterial(new GLIGHT.Color(255, 0, 244, 1)));
+        scene.add(cube);
+
+        let cubeTrack = new GLIGHT.PositionsTrack(cube);
+        cube.translate.set(4, 0, 2);
+        cubeTrack.addKeyframe(0, GLIGHT.EASE.LINEAR);
+
+        cube.translate.set(2, 4, 2);
+        cubeTrack.addKeyframe(1000, GLIGHT.EASE.LINEAR);
+
+        cube.translate.set(0, 0, 2);
+        cubeTrack.addKeyframe(2000, GLIGHT.EASE.LINEAR);
+
+        cube.translate.set(-2, 4, 2);
+        cubeTrack.addKeyframe(3000, GLIGHT.EASE.LINEAR);
+
+        cube.translate.set(-4, 0, 2);
+        cubeTrack.addKeyframe(4000, GLIGHT.EASE.LINEAR);
+
+        let sphere = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(1, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(200, 234, 0, 1)));
+        scene.add(sphere);
+
+        let sphereTrack = new GLIGHT.PositionsTrack(sphere);
+        sphereTrack.interpolationType = GLIGHT.INTERPOLATION.BSPLINE;
+
+        sphere.translate.set(4, 0, -2);
+        sphereTrack.addKeyframe(0, GLIGHT.EASE.LINEAR);
+
+        sphere.translate.set(2, 4, -2);
+        sphereTrack.addKeyframe(1000, GLIGHT.EASE.LINEAR);
+
+        sphere.translate.set(0, 0, -2);
+        sphereTrack.addKeyframe(2000, GLIGHT.EASE.LINEAR);
+
+        sphere.translate.set(-2, 4, -2);
+        sphereTrack.addKeyframe(3000, GLIGHT.EASE.LINEAR);
+
+        sphere.translate.set(-4, 0, -2);
+        sphereTrack.addKeyframe(4000, GLIGHT.EASE.LINEAR);
+
+        let dLight = new GLIGHT.DirectionalLight();
+        dLight.translate.set(5, 5, 5);
+        scene.add(dLight);
+
+        let pLight = new GLIGHT.PointLight();
+        pLight.translate.set(-5, 5, -5);
+        scene.add(pLight);
+
+        GLIGHT.Renderer.setClearColor(123, 123, 123);
+        let renderer = new GLIGHT.Renderer(scene);
+        renderer.viewer.translate.set(-0.004719934471368533, -2.153088173781617, -8.785265441035474);
+        renderer.viewer.rotate.set(14, 48.97510980966345, 0);
+
+        let viewerTrack = new GLIGHT.RotationsTrack(renderer.viewer);
+        viewerTrack.addKeyframe(0, GLIGHT.EASE.IN_OUT_QUAD);
+
+        renderer.viewer.rotate.set(-10, -48.97510980966345, 0);
+        viewerTrack.addKeyframe(4000, GLIGHT.EASE.IN_OUT_QUAD);
+
+        let clip = new GLIGHT.AnimationClip(renderer);
+        clip.addTrack(cubeTrack);
+        clip.addTrack(sphereTrack);
+        clip.addTrack(viewerTrack);
+        clip.loop();
+        clip.start();
+    }
+
+</script>
+</html>

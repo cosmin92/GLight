@@ -1,0 +1,20 @@
+{
+  "name": "gLight",
+  "version": "1.0.0",
+  "description": "interactive graphics: final project",
+  "main": "index.js",
+  "dependencies": {
+    "typescript": "^3.5.2"
+  },
+  "devDependencies": {
+    "rollup": "^1.16.2",
+    "typedoc": "^0.14.2"
+  },
+  "scripts": {
+    "distribution": "tsc & rollup --config rollup.config.js",
+    "doc": "typedoc --out doc ./src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

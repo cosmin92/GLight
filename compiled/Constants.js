@@ -1,0 +1,40 @@
+// Object types
+export const MESH = 0;
+export const CAMERA = 1;
+export const PERSPECTIVE_CAMERA = 2;
+export const ORTHOGRAPHIC_CAMERA = 3;
+export const LAMBERT_MATERIAL = 4;
+export const PHONG_MATERIAL = 5;
+export const DIRECTIONAL_LIGHT = 6;
+export const POINT_LIGHT = 7;
+export const HELPER = 8;
+export const GROUP = 9;
+export const TEXTURE = 10;
+export const TEXTURE_CUBE = 11;
+export const SKY_BOX = 12;
+export var INTERPOLATION;
+(function (INTERPOLATION) {
+    INTERPOLATION[INTERPOLATION["LINEAR"] = 0] = "LINEAR";
+    INTERPOLATION[INTERPOLATION["BSPLINE"] = 1] = "BSPLINE";
+})(INTERPOLATION || (INTERPOLATION = {}));
+export var EASE;
+(function (EASE) {
+    EASE[EASE["LINEAR"] = 0] = "LINEAR";
+    EASE[EASE["IN_OUT_QUAD"] = 1] = "IN_OUT_QUAD";
+    EASE[EASE["OUT_QUAD"] = 2] = "OUT_QUAD";
+    EASE[EASE["IN_QUAD"] = 3] = "IN_QUAD";
+    EASE[EASE["IN_OUT_CUBIC"] = 4] = "IN_OUT_CUBIC";
+    EASE[EASE["OUT_CUBIC"] = 5] = "OUT_CUBIC";
+    EASE[EASE["IN_CUBIC"] = 6] = "IN_CUBIC";
+    EASE[EASE["IN_OUT_QUART"] = 7] = "IN_OUT_QUART";
+    EASE[EASE["OUT_QUART"] = 8] = "OUT_QUART";
+    EASE[EASE["IN_QUART"] = 9] = "IN_QUART";
+    EASE[EASE["IN_OUT_QUINT"] = 10] = "IN_OUT_QUINT";
+    EASE[EASE["OUT_QUINT"] = 11] = "OUT_QUINT";
+    EASE[EASE["IN_QUINT"] = 12] = "IN_QUINT";
+    EASE[EASE["IN_OUT_ELASTIC"] = 13] = "IN_OUT_ELASTIC";
+    EASE[EASE["OUT_ELASTIC"] = 14] = "OUT_ELASTIC";
+    EASE[EASE["IN_OUT_SIN"] = 15] = "IN_OUT_SIN";
+    EASE[EASE["OUT_SIN"] = 16] = "OUT_SIN";
+    EASE[EASE["IN_SIN"] = 17] = "IN_SIN";
+})(EASE || (EASE = {}));

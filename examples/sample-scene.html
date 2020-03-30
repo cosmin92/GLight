@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple scene</title>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+    <!-- INCLUDE THE LIBRARY -->
+    <script type="text/javascript" src="../dist/gLight.js"></script>
+</head>
+<body>
+<canvas id="glCanvas" width="1366" height="667">
+    Your browser does not seem to support HTML5 canvas.
+</canvas>
+</body>
+
+<script type="text/javascript">
+
+    /**
+     * Add de onload handler
+     */
+    window.addEventListener("load", main);
+
+    let renderer;
+
+    function main() {
+        let canvas = document.getElementById("glCanvas");
+        GLIGHT.initialize(canvas);
+
+        let scene = new GLIGHT.Scene();
+
+        let cube = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(), new GLIGHT.LambertMaterial(new GLIGHT.Color(255, 0, 244, 1)));
+        cube.translate.set(2, 1, 0);
+        scene.add(cube);
+
+        let sphere = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(2, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(200, 234, 0, 1)));
+        sphere.translate.set(-2, 1, 0);
+        scene.add(sphere);
+
+        let dLight = new GLIGHT.DirectionalLight();
+        dLight.translate.set(5, 5, 5);
+        scene.add(dLight);
+
+        let pLight = new GLIGHT.PointLight();
+        pLight.translate.set(-5, 5, -5);
+        scene.add(pLight);
+
+        let camera = new GLIGHT.PerspectiveCamera("Camera 1");
+        scene.add(camera);
+        camera.translate.set(5, 5, -5);
+        camera.rotate.set(10, 150, -10);
+
+        GLIGHT.Renderer.setClearColor(123, 123, 123);
+        renderer = new GLIGHT.Renderer(scene);
+        renderer.viewer.translate.set(-0.004719934471368533, -2.153088173781617, -8.785265441035474);
+        renderer.viewer.rotate.set(14, 48.97510980966345, 0);
+        render();
+    }
+
+    function render() {
+        renderer.render();
+        requestAnimationFrame(render)
+    }
+
+</script>
+</html>

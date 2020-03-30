@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple scene</title>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+    <!-- INCLUDE THE LIBRARY -->
+    <script type="text/javascript" src="../dist/gLight.js"></script>
+</head>
+<body>
+<canvas id="glCanvas" width="1366" height="667">
+    Your browser does not seem to support HTML5 canvas.
+</canvas>
+</body>
+
+<script type="text/javascript">
+
+    /**
+     * Add de onload handler
+     */
+    window.addEventListener("load", main);
+
+
+    function main() {
+        let canvas = document.getElementById("glCanvas");
+        GLIGHT.initialize(canvas);
+
+        let scene = new GLIGHT.Scene();
+
+
+        // LINEAR EASING
+        let sphere = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(1, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(200, 234, 0, 1)));
+        sphere.pivot.set(0, 4, 0);
+        sphere.translate.set(-4, 0, 0);
+        scene.add(sphere);
+
+        let sphereTrack = new GLIGHT.RotationsTrack(sphere);
+
+        sphere.rotate.set(45, 0, 0);
+        sphereTrack.addKeyframe(0, GLIGHT.EASE.LINEAR);
+
+        sphere.rotate.set(-45, 0, 0);
+        sphereTrack.addKeyframe(2000, GLIGHT.EASE.LINEAR);
+
+        sphere.rotate.set(45, 0, 0);
+        sphereTrack.addKeyframe(4000, GLIGHT.EASE.LINEAR);
+
+        //EASE SIN
+        let sphere1 = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(1, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(200, 234, 0, 1)));
+        sphere1.pivot.set(0, 4, 0);
+        sphere1.translate.set(-3, 0, 0);
+        scene.add(sphere1);
+
+        let sphereTrack1 = new GLIGHT.RotationsTrack(sphere1);
+
+        sphere1.rotate.set(45, 0, 0);
+        sphereTrack1.addKeyframe(0, GLIGHT.EASE.IN_OUT_SIN);
+
+        sphere1.rotate.set(-45, 0, 0);
+        sphereTrack1.addKeyframe(2000, GLIGHT.EASE.IN_OUT_SIN);
+
+        sphere1.rotate.set(45, 0, 0);
+        sphereTrack1.addKeyframe(4000, GLIGHT.EASE.IN_OUT_SIN);
+
+        //EASE ELASTIC
+        let sphere2 = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(1, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(200, 234, 0, 1)));
+        sphere2.pivot.set(0, 4, 0);
+        sphere2.translate.set(-2, 0, 0);
+        scene.add(sphere2);
+
+        let sphereTrack2 = new GLIGHT.RotationsTrack(sphere2);
+
+        sphere2.rotate.set(45, 0, 0);
+        sphereTrack2.addKeyframe(0, GLIGHT.EASE.IN_OUT_ELASTIC);
+
+        sphere2.rotate.set(-45, 0, 0);
+        sphereTrack2.addKeyframe(2000, GLIGHT.EASE.IN_OUT_ELASTIC);
+
+        sphere2.rotate.set(45, 0, 0);
+        sphereTrack2.addKeyframe(4000, GLIGHT.EASE.IN_OUT_ELASTIC);
+
+
+        //EASE QUAD
+        let sphere3 = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(1, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(200, 234, 0, 1)));
+        sphere3.pivot.set(0, 4, 0);
+        sphere3.translate.set(-1, 0, 0);
+        scene.add(sphere3);
+
+        let sphereTrack3 = new GLIGHT.RotationsTrack(sphere3);
+
+        sphere3.rotate.set(45, 0, 0);
+        sphereTrack3.addKeyframe(0, GLIGHT.EASE.IN_OUT_QUAD);
+
+        sphere3.rotate.set(-45, 0, 0);
+        sphereTrack3.addKeyframe(2000, GLIGHT.EASE.IN_OUT_QUAD);
+
+        sphere3.rotate.set(45, 0, 0);
+        sphereTrack3.addKeyframe(4000, GLIGHT.EASE.IN_OUT_QUAD);
+
+
+        //EASE CUBIC
+        let sphere4 = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(1, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(200, 234, 0, 1)));
+        sphere4.pivot.set(0, 4, 0);
+        sphere4.translate.set(0, 0, 0);
+        scene.add(sphere4);
+
+        let sphereTrack4 = new GLIGHT.RotationsTrack(sphere4);
+
+        sphere4.rotate.set(45, 0, 0);
+        sphereTrack4.addKeyframe(0, GLIGHT.EASE.IN_OUT_CUBIC);
+
+        sphere4.rotate.set(-45, 0, 0);
+        sphereTrack4.addKeyframe(2000, GLIGHT.EASE.IN_OUT_CUBIC);
+
+        sphere4.rotate.set(45, 0, 0);
+        sphereTrack4.addKeyframe(4000, GLIGHT.EASE.IN_OUT_CUBIC);
+
+
+        //EASE QUART
+        let sphere5 = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(1, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(200, 234, 0, 1)));
+        sphere5.pivot.set(0, 4, 0);
+        sphere5.translate.set(1, 0, 0);
+        scene.add(sphere5);
+
+        let sphereTrack5 = new GLIGHT.RotationsTrack(sphere5);
+
+        sphere5.rotate.set(45, 0, 0);
+        sphereTrack5.addKeyframe(0, GLIGHT.EASE.IN_OUT_QUART);
+
+        sphere5.rotate.set(-45, 0, 0);
+        sphereTrack5.addKeyframe(2000, GLIGHT.EASE.IN_OUT_QUART);
+
+        sphere5.rotate.set(45, 0, 0);
+        sphereTrack5.addKeyframe(4000, GLIGHT.EASE.IN_OUT_QUART);
+
+
+        //EASE QUINT
+        let sphere6 = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(1, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(200, 234, 0, 1)));
+        sphere6.pivot.set(0, 4, 0);
+        sphere6.translate.set(2, 0, 0);
+        scene.add(sphere6);
+
+        let sphereTrack6 = new GLIGHT.RotationsTrack(sphere6);
+
+        sphere6.rotate.set(45, 0, 0);
+        sphereTrack6.addKeyframe(0, GLIGHT.EASE.IN_OUT_QUINT);
+
+        sphere6.rotate.set(-45, 0, 0);
+        sphereTrack6.addKeyframe(2000, GLIGHT.EASE.IN_OUT_QUINT);
+
+        sphere6.rotate.set(45, 0, 0);
+        sphereTrack6.addKeyframe(4000, GLIGHT.EASE.IN_OUT_QUINT);
+
+
+        let dLight = new GLIGHT.DirectionalLight();
+        dLight.translate.set(5, 5, 5);
+        scene.add(dLight);
+
+        let pLight = new GLIGHT.PointLight();
+        pLight.translate.set(-5, 5, -5);
+        scene.add(pLight);
+
+        GLIGHT.Renderer.setClearColor(123, 123, 123);
+        let renderer = new GLIGHT.Renderer(scene);
+        renderer.viewer.translate.set(-0.004719934471368533, -2.153088173781617, -8.785265441035474);
+        renderer.viewer.rotate.set(14, 48.97510980966345, 0);
+
+        let clip = new GLIGHT.AnimationClip(renderer);
+        clip.addTrack(sphereTrack);
+        clip.addTrack(sphereTrack1);
+        clip.addTrack(sphereTrack2);
+        clip.addTrack(sphereTrack3);
+        clip.addTrack(sphereTrack4);
+        clip.addTrack(sphereTrack5);
+        clip.addTrack(sphereTrack6);
+
+        clip.loop();
+        clip.start();
+    }
+
+</script>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple scene</title>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+    <!-- INCLUDE THE LIBRARY -->
+    <script type="text/javascript" src="../dist/gLight.js"></script>
+</head>
+<body>
+<canvas id="glCanvas" width="1366" height="667">
+    Your browser does not seem to support HTML5 canvas.
+</canvas>
+</body>
+
+<script type="text/javascript">
+
+    /**
+     * Set the onload event callback
+     */
+    window.addEventListener("load", main);
+
+    let renderer, scene;
+
+    function main() {
+        let canvas = document.getElementById("glCanvas");
+        GLIGHT.initialize(canvas);
+
+        scene = new GLIGHT.Scene();
+
+        createDog();
+        createMan();
+
+        let light = new GLIGHT.DirectionalLight();
+        scene.add(light);
+        light.translate.set(4, 4, -4);
+
+        GLIGHT.Renderer.setClearColor(123, 123, 123, 255);
+        renderer = new GLIGHT.Renderer(scene);
+        renderer.viewer.translate.set(-0.004719934471368533, -2.153088173781617, -8.785265441035474);
+        renderer.viewer.rotate.set(14, 48.97510980966345, 0);
+
+        render();
+    }
+
+    function render() {
+        renderer.render();
+        requestAnimationFrame(render)
+    }
+
+    function createMan() {
+        let body = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.5, 1, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        body.translate.set(0, 3.45, 0);
+        body.pivot.set(0, -1, 0);
+
+        let leftUpperLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.2, 0.5, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftUpperLeg.translate.set(0.3, -1.55, 0);
+        leftUpperLeg.pivot.set(0, 0.5, 0);
+        leftUpperLeg.setParent(body);
+
+        let leftLowerLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.2, 0.5, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftLowerLeg.translate.set(0, -1.05, 0);
+        leftLowerLeg.pivot.set(0, 0.5, 0);
+        leftLowerLeg.setParent(leftUpperLeg);
+
+        let leftFoot = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.15, 0.15, 0.4), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftFoot.translate.set(0, -0.7, 0.2);
+        leftFoot.pivot.set(0, 0, 0.1);
+        leftFoot.setParent(leftLowerLeg);
+
+        let rightUpperLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.2, 0.5, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightUpperLeg.translate.set(-0.3, -1.55, 0);
+        rightUpperLeg.pivot.set(0, 0.5, 0);
+        rightUpperLeg.setParent(body);
+
+        let rightLowerLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.2, 0.5, 0.2), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightLowerLeg.translate.set(0, -1.05, 0);
+        rightLowerLeg.pivot.set(0, 0.5, 0);
+        rightLowerLeg.setParent(rightUpperLeg);
+
+        let rightFoot = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.15, 0.15, 0.4), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightFoot.translate.set(0, -0.7, 0.2);
+        rightFoot.pivot.set(0, 0, 0.1);
+        rightFoot.setParent(rightLowerLeg);
+
+        let leftUpperHand = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.1, 0.5, 0.1), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftUpperHand.translate.set(0.7, 0.5, 0);
+        leftUpperHand.rotate.set(0, 0, 10);
+        leftUpperHand.pivot.set(0, 0.5, 0);
+        leftUpperHand.setParent(body);
+
+        let leftLowerHand = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.1, 0.5, 0.1), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftLowerHand.translate.set(0, -1.05, 0);
+        leftLowerHand.pivot.set(0, 0.5, 0);
+        leftLowerHand.setParent(leftUpperHand);
+
+        let leftFist = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(0.4, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftFist.translate.set(0, -0.7, 0);
+        leftFist.pivot.set(0, 0, 0);
+        leftFist.setParent(leftLowerHand);
+
+        let rightUpperHand = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.1, 0.5, 0.1), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightUpperHand.translate.set(-0.7, 0.5, 0);
+        rightUpperHand.rotate.set(0, 0, -10);
+        rightUpperHand.pivot.set(0, 0.5, 0);
+        rightUpperHand.setParent(body);
+
+        let rightLowerHand = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.1, 0.5, 0.1), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightLowerHand.translate.set(0, -1.05, 0);
+        rightLowerHand.pivot.set(0, 0.5, 0);
+        rightLowerHand.setParent(rightUpperHand);
+
+        let rightFist = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(0.4, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightFist.translate.set(0, -0.7, 0);
+        rightFist.pivot.set(0, 0, 0);
+        rightFist.setParent(rightLowerHand);
+
+        let neck = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.15, 0.1, 0.15), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        neck.translate.set(0, 1.1, 0);
+        neck.pivot.set(0, -0.1, 0);
+        neck.setParent(body);
+
+        let head = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(0.6, 20, 20), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        head.translate.set(0, 0.55, 0);
+        head.scale.set(1, 1.5, 1);
+        head.pivot.set(0, -0.4, 0);
+        head.setParent(neck);
+
+        scene.add(leftUpperLeg);
+        scene.add(leftLowerLeg);
+
+        scene.add(rightUpperLeg);
+        scene.add(rightLowerLeg);
+
+
+        scene.add(leftUpperHand);
+        scene.add(leftLowerHand);
+        scene.add(leftFist);
+
+        scene.add(rightUpperHand);
+        scene.add(rightLowerHand);
+        scene.add(rightFist);
+
+        scene.add(neck);
+        scene.add(head);
+
+        scene.add(leftFoot);
+        scene.add(rightFoot);
+
+        scene.add(body);
+    }
+
+    function createDog() {
+        let body = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.3, 0.3, 0.6), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        body.translate.set(1.5, 1.2, 0);
+        body.scale.x = -0.8;
+        body.pivot.set(0, 0, 0);
+
+        let frontLeftUpperLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.05, 0.3, 0.05), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        frontLeftUpperLeg.translate.set(0.37, -0.3, 0.5);
+        frontLeftUpperLeg.pivot.set(0, 0.3, 0);
+        frontLeftUpperLeg.setParent(body);
+
+        let frontLeftLowerLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.05, 0.3, 0.05), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        frontLeftLowerLeg.translate.set(0, -0.62, 0);
+        frontLeftLowerLeg.pivot.set(0, 0.3, 0);
+        frontLeftLowerLeg.setParent(frontLeftUpperLeg);
+
+        let frontRightUpperLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.05, 0.3, 0.05), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        frontRightUpperLeg.translate.set(-0.37, -0.3, 0.5);
+        frontRightUpperLeg.pivot.set(0, 0.3, 0);
+        frontRightUpperLeg.setParent(body);
+
+        let frontRightLowerLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.05, 0.3, 0.05), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        frontRightLowerLeg.translate.set(0, -0.62, 0);
+        frontRightLowerLeg.pivot.set(0, 0.3, 0);
+        frontRightLowerLeg.setParent(frontRightUpperLeg);
+
+        let backLeftUpperLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.05, 0.3, 0.05), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        backLeftUpperLeg.translate.set(0.37, -0.3, -0.5);
+        backLeftUpperLeg.pivot.set(0, 0.3, 0);
+        backLeftUpperLeg.setParent(body);
+
+        let backLeftLowerLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.05, 0.3, 0.05), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        backLeftLowerLeg.translate.set(0, -0.62, 0);
+        backLeftLowerLeg.pivot.set(0, 0.3, 0);
+        backLeftLowerLeg.setParent(backLeftUpperLeg);
+
+        let backRightUpperLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.05, 0.3, 0.05), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        backRightUpperLeg.translate.set(-0.37, -0.3, -0.5);
+        backRightUpperLeg.pivot.set(0, 0.3, 0);
+        backRightUpperLeg.setParent(body);
+
+        let backRightLowerLeg = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.05, 0.3, 0.05), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        backRightLowerLeg.translate.set(0, -0.62, 0);
+        backRightLowerLeg.pivot.set(0, 0.3, 0);
+        backRightLowerLeg.setParent(backRightUpperLeg);
+
+        let neck = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.1, 0.1, 0.15), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        neck.translate.set(0, 0.2, 0.8);
+        neck.rotate.set(-25, 0, 0);
+        neck.pivot.set(0, 0, -0.2);
+        neck.setParent(body);
+
+        let head = new GLIGHT.Mesh(new GLIGHT.SphereGeometry(0.2, 10, 10), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        head.translate.set(0, -0.1, 0.3);
+        head.scale.set(2.5, 3, 1.7);
+        head.pivot.set(0, 0.1, 0);
+        head.rotate.set(-24, 0, 0);
+        head.setParent(neck);
+
+        let leftEar = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.01, 0.01, 0.06), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        leftEar.translate.set(-0.05, 0.05, 0.1);
+        leftEar.rotate.set(-12, 0, 0);
+        leftEar.pivot.set(0, 0, 0);
+        leftEar.setParent(head);
+
+        let rightEar = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.01, 0.01, 0.06), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        rightEar.translate.set(0.05, 0.05, 0.1);
+        rightEar.rotate.set(-12, 0, 0);
+        rightEar.pivot.set(0, 0, 0);
+        rightEar.setParent(head);
+
+        let tail = new GLIGHT.Mesh(new GLIGHT.BoxGeometry(0.03, 0.03, 0.3), new GLIGHT.LambertMaterial(new GLIGHT.Color(Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 255)));
+        tail.translate.set(0, 0.2, -0.95);
+        tail.rotate.set(47, 0, 0);
+        tail.pivot.set(0, 0, 0.3);
+        tail.setParent(body);
+
+        scene.add(frontLeftUpperLeg);
+        scene.add(frontLeftLowerLeg);
+
+        scene.add(frontRightUpperLeg);
+        scene.add(frontRightLowerLeg);
+
+        scene.add(backLeftUpperLeg);
+        scene.add(backLeftLowerLeg);
+
+        scene.add(backRightUpperLeg);
+        scene.add(backRightLowerLeg);
+        scene.add(neck);
+        scene.add(head);
+
+        scene.add(tail);
+        scene.add(leftEar);
+        scene.add(rightEar);
+
+        scene.add(body);
+    }
+</script>
+</html>

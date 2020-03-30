@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="COSMIN FANE COZMA">
+    <meta name="Student number" content="1613880">
+    <title>Interactive graphics: final project</title>
+
+    <style type="text/css">
+        body, html, h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #3e3e3e;
+        }
+
+        .container {
+            width: 1140px;
+            margin: 0 auto;
+            background-color: white;
+        }
+
+        .row {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 style="padding: 30px 0;text-align: center; border-bottom: 1px solid black;">Interactive graphics(final project)
+        examples</h1>
+    <div class="row">
+        <h3>User commands:</h3>
+        <ul>
+            <li>Mouse click & drag: rotate the viewer position around the (0,0,0) point in global coordinate system</li>
+            <li>Shift key + Mouse click & drag: translate the viewer position</li>
+            <li>Alt key + Mouse click: select an object in the scene</li>
+            <li>The following commands can be used to render a clean scene
+                <ul>
+                    <li>Key1: show/hide x axis</li>
+                    <li>Key2: show/hide y axis</li>
+                    <li>Key3: show/hide z axis</li>
+                    <li>Key4: show/hide axis</li>
+                    <li>Key5: show/hide grid</li>
+                    <li>Key6: show/hide lights and cameras()</li>
+                </ul>
+            </li>
+            <li>KeyP + [KeyX | KeyY | KeyZ] + [ArrowUp | ArrowDown]: translate the pivot position</li>
+            <li>KeyT + [KeyX | KeyY | KeyZ] + [ArrowUp | ArrowDown]: translate the selected mesh</li>
+            <li>KeyR + [KeyX | KeyY | KeyZ] + [ArrowUp | ArrowDown]: rotate the selected mesh</li>
+            <li>KeyS + [KeyX | KeyY | KeyZ] + [ArrowUp | ArrowDown]: scale the selected mesh</li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <h3>Examples:</h3>
+        <ol>
+            <li>
+                <a href="examples/sample-scene.html">Simple scene</a>
+                <div class="description">
+                    A simple scene where you can see some of the features of the library. In particular, this scene was built to show how the entities in the scene are displayed. You can also see the application of lights and materials. Furthermore, the use of the commands and the selection method can be verified
+                </div>
+            </li>
+            <li><a href="examples/textures.html">Textures</a>
+                <div class="description">
+                    Here we can see the application of various textures to various meshes. And the first simple animation
+                </div>
+            </li>
+            <li><a href="examples/hierarchical-models.html">Hierarchical models</a>
+                <div class="description">
+                    Here a man and a dog are created as two forms of herarchical models. The use of the pivot point needs to be pointed out here. In fact, by selecting one of the components the transformations take place around the pivot and not outside the mesh (use the commands listed above).
+                </div>
+            </li>
+            <li><a href="examples/easing.html">Easing</a>
+                <div class="description">
+                    Different types of easing and linear interpolation are applied to the spheres of this example
+                </div>
+            </li>
+
+            <li><a href="examples/interpolations.html">Interpolations</a>
+                <div class="description">
+                    The library implements two types of interpolation: linear and BSpline. In the example to the same keyframes different types of interpolation are applied
+                </div>
+            </li>
+
+            <li><a href="examples/anim-man.html">Complex animation</a>
+                <div class="description">
+                    Here you can see a short animation of a walking man using different types of easing and interpolation
+                </div>
+            </li>
+        </ol>
+    </div>
+    </div>
+</body>
+</html>
